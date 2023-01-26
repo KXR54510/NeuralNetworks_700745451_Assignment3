@@ -1,0 +1,56 @@
+#class inheritance
+#create a class Employee
+class Employee:
+    count = 0
+    totalSalary = 0
+    def __init__(self, name, family, salary, department):
+        self.name = name
+        self.family = family
+        self.salary = salary
+        self.department = department
+        Employee.count += 1 #to track the total count of employees
+        Employee.totalSalary += self.salary #to add the salary which is to be used to calculate average income
+
+    #function to calcualte the average income
+    def averageSalary(self):
+        average = Employee.totalSalary/Employee.count
+        return average
+    
+    #funciton to display Employee details
+    def displayEmpDetials(self):
+        print("\nDetails of Employee,",self.name,":")
+        print("\tNumber of Family Members:",self.family)
+        print("\tSalary per month:", self.salary)
+        print("\tDepartment:",self.department)
+    
+#create a child class inheriting properties from Employee class
+class FulltimeEmployee(Employee):
+    pass
+
+#create objects of Employee Class and FulltimeEmployee class
+e1 = Employee("Jackson Mcguire", 3, 3000, "Biology")
+e2 = Employee("Mandy Williams", 4, 2500, "Economis")
+ft1 = FulltimeEmployee("Kathy Coffman", 2, 2700, "Geography")
+ft2 = FulltimeEmployee("Crystal Jonas", 3, 2900, "Mathematics")
+
+#call the member funcitons using class instances
+print("Total Number of Employees:",e1.count)
+print("Average Salary of the Employees:",e1.averageSalary())
+e1.displayEmpDetials()
+e2.displayEmpDetials()
+ft1.displayEmpDetials()
+ft2.displayEmpDetials()
+
+#Replacing max value in each row by zero
+import numpy as np
+
+randVector = np.random.uniform(1.0,20.0,20) #random vector of size 20 with float values from 1.0 to 20.0
+print("Randon vector of size 20:",randVector)
+
+reshapedArr = randVector.reshape(4,5) #reshape into array of dimesion 4 X 5
+print("\nAfter reshaping into Array of dimension 4 X 5 \n", reshapedArr)
+print("\nMaximum Values in each row:\n", reshapedArr.max(axis=1).reshape(-1,1)) #print the max values from each row
+
+#replace max values in each row by zero
+modifiedArr = np.where(reshapedArr == np.amax(reshapedArr, axis=1).reshape(-1, 1), 0, x)
+print("\nModified Array:\n",modifiedArr)
